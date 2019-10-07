@@ -16,6 +16,7 @@ public class MoneyCalculator {
     
     private double amount;
     private double exchangeRate;
+    private String currency;
     
     private static double getExchangeRate(String from, String to) throws IOException{
         URL url = new URL("http://free.currencyconverterapi.com/api/v5/convert?q="
@@ -39,13 +40,16 @@ public class MoneyCalculator {
         System.out.println("Introduzca una cantidad en dólares:");
         Scanner scanner = new Scanner(System.in);
         amount = Double.parseDouble(scanner.next());
+        
+        System.out.println("Introduce una divisa:");
+        currency = scanner.next();
     }
 
     private void process() throws IOException {
-        exchangeRate = getExchangeRate("USD", "EUR");
+        exchangeRate = getExchangeRate(currency, "EUR");
     }
 
     private void output() {
-        System.out.println(amount + "USD equivalen a " + amount*exchangeRate + "EUR");
+        System.out.println(amount + " " + currency + " = " + amount*exchangeRate + "EUR");
     }
 }
